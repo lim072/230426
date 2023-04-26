@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+   
+    
+    <script src="https://kit.fontawesome.com/220fae79fc.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="gallery">
+        <h1>UI/UX <span>PORTFOLIO</span></h1>
+
+        <ul class="auto">
+           
+            <li class="btnStart">
+                <i class="fas fa-play"></i>
+            </li>
+            
+            <li class="btnStop">
+                <i class="fas fa-pause"></i>
+            </li>
+
+        </ul>
+
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="inner">
+                    <div class="con">
+                        <img src="img/pic1.png" alt="">
+                        <h2>Lorem ipsum dolor sit.</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quibusdam.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="inner">
+                    <div class="con">
+                        <img src="img/pic2.png" alt="">
+                        <h2>Lorem ipsum dolor sit.</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quibusdam.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="inner">
+                    <div class="con">
+                        <img src="img/pic3.png" alt="">
+                        <h2>Lorem ipsum dolor sit.</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quibusdam.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="inner">
+                    <div class="con">
+                        <img src="img/pic4.png" alt="">
+                        <h2>Lorem ipsum dolor sit.</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quibusdam.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="inner">
+                    <div class="con">
+                        <img src="img/pic5.png" alt="">
+                        <h2>Lorem ipsum dolor sit.</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quibusdam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="swiper-button-next"></div>
+
+        <div class="swiper-button-prev"></div>
+
+        <div class="swiper-pagination"></div>
+    </section>
+
+    <script>
+        /* 생성자 함수 : 객체지향같이 어떤 틀(주형)을 통해서 새로운 개체를 생성하는
+        함수를 의미합니다  new <-- 생성자함수 */
+        var swiper = new Swiper(".gallery", {
+            navigation: {
+                //이전,다음 버튼에 관한 키값
+                nextEl : ".swiper-button-next",
+                prevEl : ".swiper-button-prev"
+            },
+            loop : true, //무한루프
+            spaceBetween : 0, //슬라이더 사이의 공간은 0
+            speed : 1000, //슬라이딩 되는 속도
+            effect: "coverflow", // 어떤 이펙트 효과인지 <-- 이값에 따라서
+            grabCursor: true, //커서의 모양이 손바닥모양
+            centeredSlides: true, //coverflow 효과에서 활성화된 슬라이더의 위치가 정가운데 배치할지말지의 여부
+            slidesPerView: "auto", // 화면에 보여지는 슬라이더의 갯수, 자동=브라우저의 크기에 맞춰서 보여지도록하는것
+            
+            autoplay :{
+                 delay : 1000,  //1초의 딜레이를 가진뒤 오토시작
+                 disableOnInteraction : false //오토플레이 중간개입시 자동롤링(오토플레이)의 재시작여부               
+            },
+            coverflowEffect: { //위의 effect에 따라서 이 키값이 달라집니다
+            rotate: 50, //슬라이더의 회전각도
+            stretch: -100, //슬라이더 간의 거리
+            depth: 400, //깊이효과 (슬라이더의 회전각도의 따라서 3d 깊이 효과)
+            modifier: 1, //위의 여러 효과의 배수를 지정합니다
+            slideShadows: false, //슬라이더의 그림자효과
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        type : "fraction" //타입을 지정
+      },
+    });
+
+    let btnStart = document.querySelector(".btnStart");
+    let btnStop = document.querySelector(".btnStop");
+
+    btnStart.addEventListener("click", () => {
+        swiper.autoplay.start();
+    })
+    btnStop.addEventListener("click", () => {
+        swiper.autoplay.stop();
+    })
+    </script>
+</body>
+</html>
