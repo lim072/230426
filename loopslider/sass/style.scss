@@ -1,21 +1,23 @@
 @charset "utf-8";
 @import "reset.scss";
 
+
 #slider{
     width: 400px;
+    border-radius: 20px;
     height: 250px;
     position: relative;
     margin: 100px auto;
-    // overflow: hidden;
+    overflow: hidden;
 
     ul{
         position: absolute;
         top: 0;
         left: 0;
-        margin-left: 0;
-        width: 300%;
+        
+        width: calc(100% * 3);
         height: 100%;
-        transition: 1s;
+        
         li{
             width: calc(100% / 3);
             height: 100%;
@@ -36,6 +38,8 @@
             &[data-index="3"]{
                 background-color: rgb(238, 164, 219);
             }
+
+        
         }
     }
 }

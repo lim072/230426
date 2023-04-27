@@ -2,26 +2,33 @@ let ul = document.querySelector("ul");
 let prev = document.querySelector(".prev");
 let next = document.querySelector(".next");
 let lis = ul.querySelectorAll("li");
+let len = lis.length;
+let enableClick = true;
 
-ul.style.marginLeft = "-100%";
 
+init();
 
 next.addEventListener("click", (e)=>{
     e.preventDefault();
 
-    ul.style.marginLeft = '-200%'; 
-    ul.append(ul.firstElementChild); 
+    if (enableClick) {
+        
+        enableClick = false;
+        nextSlide();
+    }
 
+    
 })
 
 prev.addEventListener("click", (e)=>{
     e.preventDefault();
 
-    ul.style.marginLeft = '0%'; 
-    ul.prepend(ul.lastElementChild); 
-
+    if (enableClick) {
+       
+        enableClick = false;
+        prevSlide();
+    }
 })
-
 
 
 /*
@@ -61,5 +68,70 @@ data속성이란??
 개발자가 속성값으로 특정 정보를 은닉하는 방법입니다
 DOM 요소에는 영향을 주지 않습니다 data-이름자유롭게 작성 ="";
 data속성으로 지정하고, 값을 넣은 값은 개발자가 자유롭게 활용이 가능합니다
-          
+  
+
+loop 슬라이더의 기본 로직
+1. 초기 ul의 위치값을 left, margin-left가 -100%로 설정한다
+=> loop가 되려면 반드시 보여지는 패널의 앞뒤에 최소 1개의 패널이 존재해야한다
+2. 슬라이드의 기본모션
+prev버튼 클릭시 -100% -> 0%
+next버튼 클릭시 -100% -> -200%
+3. 이동이 끝나고 나서는
+앞이나 뒤에 쌓이 패널을 다시 앞으나 뒤로 재배치를 해줘야한다 => loop가 되려면
+우리가 보려는 패널이 정상적으로 보이게 됨
+4.ul의 초기위치를 항상 다시 -100%로 초기화 한다
 */
+
+
+function init(){
+    ul.style.left = "-100%";
+    ul.prepend(ul.lastElementChild);
+
+    //초기 화면이 1번 슬라이드가 올 수 있도록 처음에 맨뒤슬라이드를 
+    // prepend로 떼어 내어 앞에 붙인다
+
+    ul.style.width = `${100 * len}%`;
+
+    lis.forEach((el) => {
+    el.style.width = `${100 / len}%`
+})
+}
+
+function nextSlide(){
+   
+    // ul.style.marginLeft = '-200%'; 
+    // ul.append(ul.firstElementChild);
+    // ul.style.marginleft = '-100%';
+    // //동기적으로 해야한다 => 콜백을 사용해야합니다
+   
+    new Anim(ul, {
+        prop : 'left',
+        value : "-200%",
+        duration : 1000,
+
+        callback : () => {
+            ul.append(ul.firstElementChild);
+            ul.style.left = "-100%"
+            enableClick = true;
+        }
+    }) 
+    
+}
+
+
+function prevSlide(){
+    // ul.style.marginLeft = '0%'; 
+    // ul.prepend(ul.lastElementChild); 
+
+    new Anim(ul, {
+        prop: 'left',
+        value: "0%",
+        duration: 1000,
+        callback: ()=>{
+            
+            ul.style.left = "-100%";
+            ul.prepend(ul.lastElementChild);
+            enableClick = true;
+        }
+    })
+}
